@@ -13,23 +13,23 @@ class Engine:
         self.player = player
         self.event_handler = event_handler
 
-        def handle_events(self, events: Iterable[Any]):
-            for event in events:
-                action = self.event_handler.dispatch(event)
+    def handle_events(self, events: Iterable[Any]):
+        for event in events:
+            action = self.event_handler.dispatch(event)
 
-                if action is None:
-                    continue
+            if action is None:
+                continue
 
-                if isinstance(action, MovementAction):
-                    self.player.move(dx=action.dx, dy=action.dy)
+            if isinstance(action, MovementAction):
+                self.player.move(dx=action.dx, dy=action.dy)
 
-                elif isinstance(action, EscapeAction):
-                    raise SystemExit()
+            elif isinstance(action, EscapeAction):
+                raise SystemExit()
 
-        def render(self, console: Console, context: Context) -> None:
-            for entity in self.entities:
-                console.print(entity.x, entity.y, entity.char, fg=entity.color)
+    def render(self, console: Console, context: Context) -> None:
+        for entity in self.entities:
+            console.print(entity.x, entity.y, entity.char, fg=entity.color)
 
-            context.present(console)
+        context.present(console)
 
-            console.clear()
+        console.clear()
